@@ -1,16 +1,20 @@
+import {useState} from "react";
 import './App.css'
-import DestinationCard from "./components/DestinationCard.jsx";
+import Form from "./components/Form.jsx";
+import DestinationList from "./components/DestinationList.jsx";
 
 function App() {
+    const [destinations, setDestination] = useState([]);
+
+    const handleSubmit = (newTrip) => {
+        setDestination((prevState) => ([...prevState, newTrip]));
+    };
 
   return (
     <main>
        <h1>Time Travel Planer</h1>
-      <DestinationCard
-          city="Paris"
-          year={1914}
-          description="Dance and drink coffee with Hemingway."
-      />
+        <Form onSubmit={handleSubmit} />
+        <DestinationList destinations={destinations} />
     </main>
   )
 }
