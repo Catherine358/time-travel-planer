@@ -5,6 +5,24 @@ import DestinationList from "./components/DestinationList.jsx";
 
 function App() {
     const [destinations, setDestination] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const fetchAllCountries = async () => {
+        try {
+            setLoading(true);
+            const res = await fetch('https://restcountries.com/v3.1/all');
+            const data = await res.json();
+            console.log('data ', data);
+            setLoading(false);
+        } catch (err) {
+            setLoading(false);
+            console.log(err);
+        }
+    };
+
+    useEffect(() => {
+        fetchAllCountries();
+    }, []);
 
     const handleSubmit = (newTrip) => {
         setDestination((prevState) => ([...prevState, newTrip]));
