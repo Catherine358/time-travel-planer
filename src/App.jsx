@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import './App.css'
 import Form from "./components/Form.jsx";
 import DestinationList from "./components/DestinationList.jsx";
@@ -27,6 +27,12 @@ function App() {
     const handleSubmit = (newTrip) => {
         setDestination((prevState) => ([...prevState, newTrip]));
     };
+
+    if (loading) {
+        return (
+            <p>Page is loading...</p>
+        );
+    }
 
   return (
     <main>
